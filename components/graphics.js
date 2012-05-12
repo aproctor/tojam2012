@@ -60,7 +60,7 @@ Crafty.c("MaskImage", {
 	* ~~~
 	* @see Crafty.sprite
 	*/
-	mimage: function (url, repeat) {
+	image: function (url, repeat) {
 		this.__image = url;
 		this._repeat = repeat || "no-repeat";
 

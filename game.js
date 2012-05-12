@@ -12,6 +12,7 @@ var ABGame = {
     
   curScene: 0,
   scenes: ['splash',
+    'choose',
     'main-world',
     /* NEW SCENES HERE */
     'game_over'],
@@ -25,7 +26,30 @@ var ABGame = {
     EU: 'images/World/EU.png',
     RU: 'images/World/RU.png',
     MEA: 'images/World/MEA.png',
-    DU: 'images/World/DU.png'
+    DU: 'images/World/DU.png',
+    
+    choose_screen: 'images/Disasters/choose_screen.png',
+    
+    alien_32: 'images/Disasters/32/alien.png',
+    com_32: 'images/Disasters/32/com.png',
+    moral_32: 'images/Disasters/32/moral.png',
+    nuke_32: 'images/Disasters/32/nuke.png',
+    rap_32: 'images/Disasters/32/rap.png',
+    warm_32: 'images/Disasters/32/warm.png',
+    
+    alien_96: 'images/Disasters/96/alien.png',
+    com_96: 'images/Disasters/96/com.png',
+    moral_96: 'images/Disasters/96/moral.png',
+    nuke_96: 'images/Disasters/96/nuke.png',
+    rap_96: 'images/Disasters/96/rap.png',
+    warm_96: 'images/Disasters/96/warm.png'
+  },
+  
+  disaster: null,
+  chooseDisaster: function(reference) {
+    alert('Chose '+reference);
+    this.disaster = reference;
+    //ABGame.nextScene();
   },
   
   restart: function() {

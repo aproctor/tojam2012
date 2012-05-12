@@ -32,31 +32,54 @@ Crafty.c("ABWorld", {
 Crafty.c("ABRegion", {
     title: null,
     reference: null,
+    titleEn: null,
   
     init: function() {
-      this.addComponent("2D, DOM, Text, Color, MaskImage, Mouse");     
+      this.addComponent("2D, DOM, Image, Mouse");     
       this.bind("Click", function(){
         //click
+        //alert(this.title);
       });         
       this.attr({x: 0, y: 0});
+      
+      /*
+       * Draw Func
+       */
+      var draw = function (e) {
+			  $(e).css("opacity",""+Math.random());
+  		};
+  		this.bind("Draw", draw).bind("RemoveComponent", function (id) {
+  			if (id === "Image") this.unbind("Draw", draw);
+  		});
     },
     
     setup: function() {
-       this.mimage(ABGame.ASSETS[this.reference]);
-       this.color("red")
-       this.textColor("#FFF");
+       this.image(ABGame.ASSETS[this.reference]);
+       this.titleEn = Crafty.e("ABRegText");
+       this.titleEn.text(this.title);
+       this.titleEn.setup(this);
     },
     
     setTitle: function(t) {
-      if(t) {
-        this.title = t;
-      }
-      this.text(this.title);
+      this.title = t;
     },
        
     toString: function() {
       return this.title;
     }
+});
+
+Crafty.c("ABRegText", {
+  region: null,
+  
+  init: function() {
+    this.addComponent("DOM, Text");
+    this.textColor("blue")
+  },
+  setup: function(region) {
+    this.region = region;
+    this.attr({x: region._x + 50, y: this.region._y + 50});
+  }
 });
 
 Crafty.c("ABRegNA", {
