@@ -1,5 +1,8 @@
+var POPULATION_UNIT = 1000000;
+
 Crafty.c("ABWorld", {
   regions: null,
+  population: 0,
   
   init: function() {
     this.addComponent("2D, DOM, Image");
@@ -21,8 +24,26 @@ Crafty.c("ABWorld", {
     
     for(var r in this.regions) {
       this.regions[r].setup();
+      this.population += this.regions[r].population;
     }
+    
+    this.bind("EnterFrame", this._ABWorld_enterframe);
   },
+  
+  selectedRegionRef: null,
+  selectRegion: function(ref) {
+    $('.ABRegStats.vis').removeClass('vis');
+
+    $('#stats_'+ref).addClass('vis');    
+    
+    this.selectedRegionRef = ref;
+  },
+  
+    
+  i: 0,
+  _ABWorld_enterframe: function () {
+    console.log(this.i++);
+	},
   
   toString: function() {
     return "ABWorld<>";
@@ -33,6 +54,9 @@ Crafty.c("ABRegion", {
     title: null,
     reference: null,
     titleEn: null,
+    
+    population: 1,
+    num_exposed: 0,
   
     init: function() {
       this.addComponent("2D, DOM, Image, Mouse");     
@@ -44,13 +68,13 @@ Crafty.c("ABRegion", {
       
       /*
        * Draw Func
-       */
+       *
       var draw = function (e) {
 			  $(e).css("opacity",""+Math.random());
   		};
   		this.bind("Draw", draw).bind("RemoveComponent", function (id) {
   			if (id === "Image") this.unbind("Draw", draw);
-  		});
+  		});*/
     },
     
     setup: function() {
@@ -59,6 +83,7 @@ Crafty.c("ABRegion", {
        this.titleEn.text(this.title);
        this.titleEn.setup(this);
     },
+    
     
     setTitle: function(t) {
       this.title = t;
@@ -87,7 +112,7 @@ Crafty.c("ABRegNA", {
       this.addComponent("ABRegion");
       this.reference = "NA";
       this.setTitle("N.&nbsp;Amer");
-      this.attr({x: 0, y: 86});
+      this.attr({x: 0, y: 86, population: 80*POPULATION_UNIT});
     }
 });
 
@@ -96,7 +121,7 @@ Crafty.c("ABRegMA", {
       this.addComponent("ABRegion");
       this.reference = "MA";
       this.setTitle("Mid.&nbsp;Amer");
-      this.attr({x: 33, y: 175});
+      this.attr({x: 33, y: 175, population: 160*POPULATION_UNIT});
     }
 });
 
@@ -105,7 +130,7 @@ Crafty.c("ABRegSA", {
       this.addComponent("ABRegion");
       this.reference = "SA";
       this.setTitle("S.&nbsp;Amer");
-      this.attr({x: 105, y: 254});
+      this.attr({x: 105, y: 254, population: 200*POPULATION_UNIT});
     }
 });
 
@@ -114,7 +139,7 @@ Crafty.c("ABRegAF", {
       this.addComponent("ABRegion");
       this.reference = "AF";
       this.setTitle("Afrik");
-      this.attr({x: 258, y: 194});
+      this.attr({x: 258, y: 194, population: 300*POPULATION_UNIT});
     }
 });
 
@@ -123,7 +148,7 @@ Crafty.c("ABRegEU", {
       this.addComponent("ABRegion");
       this.reference = "EU";
       this.setTitle("Euro");
-      this.attr({x: 282, y: 93});
+      this.attr({x: 282, y: 93, population: 200*POPULATION_UNIT});
     }
 });
 
@@ -132,7 +157,7 @@ Crafty.c("ABRegRU", {
       this.addComponent("ABRegion");
       this.reference = "RU";
       this.setTitle("Russia");
-      this.attr({x: 386, y: 88});
+      this.attr({x: 386, y: 88, population: 300*POPULATION_UNIT});
     }
 });
 
@@ -141,7 +166,7 @@ Crafty.c("ABRegMEA", {
       this.addComponent("ABRegion");
       this.reference = "MEA";
       this.setTitle("Mid.&nbsp;East&nbsp;Asia");
-      this.attr({x: 357, y: 168});
+      this.attr({x: 357, y: 168, population: 500*POPULATION_UNIT});
     }
 });
 
@@ -150,6 +175,6 @@ Crafty.c("ABRegDU", {
       this.addComponent("ABRegion");
       this.reference = "DU";
       this.setTitle("Down&nbsp;Under");
-      this.attr({x: 521, y: 237});
+      this.attr({x: 521, y: 237, population: 30*POPULATION_UNIT});
     }
 });

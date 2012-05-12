@@ -1,5 +1,7 @@
 Crafty.scene('main-world', function() {
   ABGame.world = Crafty.e('ABWorld');
+  
+  $("#intro_"+ABGame.disaster).toggle();
 });
 
 Crafty.c("ABDisasterChoice", {
@@ -26,4 +28,8 @@ Crafty.c("ABDisasterChoice", {
   toString: function() {
     return "";
   }
+});
+
+$('.intros > *').live('click', function(el){
+  $(this).toggle();
 });

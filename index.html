@@ -2,32 +2,254 @@
   <head>
   <title>Tojam 2012</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-  <script type="text/javascript" src="http://craftyjs.com/release/0.4.5/crafty-min.js"></script>
+  <!-- script type="text/javascript" src="http://craftyjs.com/release/0.4.5/crafty-min.js"></script -->
+  <script type="text/javascript" src="crafty.js"></script>
   <script type="text/javascript" src="game.js"></script>
+  <script type="text/javascript" src="I18n.js"></script>
     <script type="text/javascript" src="components/graphics.js"></script>
   <script type="text/javascript" src="components/player.js"></script>
   <script type="text/javascript" src="components/regions.js"></script>
+    <script type="text/javascript" src="components/disasters.js"></script>
   <script type="text/javascript" src="scenes/splash.js"></script>
-  <script type="text/javascript" src="scenes/ui.js"></script>  
+  <script type="text/javascript" src="scenes/ui.js"></script>
   <style>
-    .ABRegion, .ABDisasterChoice {
-      border: 2px solid yellow;
+    * {
+      font-family: Arial 'Black';
+      font-weight: bold;
     }
+    
+    .clearfix:after {
+    	content: ".";
+    	display: block;
+    	clear: both;
+    	visibility: hidden;
+    	line-height: 0;
+    	height: 0;
+    }
+
+    .clearfix {
+    	display: inline-block;
+    }
+  
+    .ABRegion, .ABDisasterChoice {
+      //border: 2px solid yellow;
+    }
+    
+    .ABRegStats {
+      position: absolute;
+      display: none;
+      background: #333;
+      border: 2px solid 666;
+      width: 260px;
+      z-index: 99;
+      padding: 15px 15px;
+      color: white;
+      top: 8px;
+      left: 712;
+    }
+    .ABRegStats.vis {
+      display: block;
+    }
+    
+    .ABRegStats h3 {
+      margin-top: 0;
+      font-size: 20px;
+      color: lightBlue;
+    }
+    
+    .ABRegStats .stats {
+      font-size: 18px;
+      width: 260px;
+    }
+    .ABRegStats .stats em {
+      float: right;
+    }
+    .ABRegStats .total {
+      color: #CCC;
+    }
+    .ABRegStats .converted {
+      color: lightGreen;
+    }
+    .ABRegStats .disb {
+      color: red;
+    }
+    .ABRegStats .unexposed {
+      color: #CCC;
+    }
+    
+    .ABRegStats .actions a {
+      width: 260px;
+      color: lightBlue;
+      float: left;
+      clear: both;
+    }
+    
+    .ABRegStats .actions a em {
+      float: right;
+    }
+    
+    
     
     .ABRegText {
       color: lightBlue;
       z-index: 999;
-      font-weight: bold;
-      font-family: Arial Black;
       font-size: 25;
       line-height: 100%;
       text-align: center;
       -webkit-text-stroke: 1px black;
     }
+    
+    .intros > * {
+      position: absolute;
+      display: none;
+      background: rgba(240,240,240,0.8);
+      box-shadow: 1px 1px 20px #EEB01D;
+      border-radius: 5px;
+      width: 495px;
+      margin: 80px 83px;
+      z-index: 99;
+      padding: 15px 15px;
+    }
+    
+    .intros > * h3 {
+      margin-top: 0px;
+    }
+    
+    .intros .icn {
+      width: 96px;
+      height: 128px;
+      float: left;
+      margin-right: 20px;
+    }
+    
+    #intro_alien .icn {
+      background: url('images/Disasters/96/alien.png');
+    }
+    
+    #intro_com .icn {
+      background: url('images/Disasters/96/com.png');
+    }
+    
+    #intro_moral .icn {
+      background: url('images/Disasters/96/moral.png');
+    }
+    
+    #intro_nuke .icn {
+      background: url('images/Disasters/96/nuke.png');
+    }
+    
+    #intro_rap .icn {
+      background: url('images/Disasters/96/rap.png');
+    }
+    
+    #intro_warm .icn {
+      background: url('images/Disasters/96/warm.png');
+    }
+    
   </style>
   </head>
   <body>
-  
-
+    <div class="intros">
+      <!-- alien -->
+      <div id="intro_alien">
+        <div class="icn">
+        </div>
+        <h3>Alien Invasion</h3>
+        <div class="text">
+          The world is ending!<br /><br />
+          After driving 3-nights straight in your big rig, you noticed a strange
+          pattern of lights in the night sky.  You attempt to reach out on your
+          HAM radio but are greeted by a series of scrambled bleeps and bloops. 
+          <br /><br />              
+          The world is ending.  Spread the Word!
+        </div>
+      </div>
+      
+      <!-- com -->
+      <div id="intro_com">
+        <div class="icn">
+        </div>
+        <h3>Communism</h3>
+        <div class="text">
+          The world is ending!<br /><br />
+          
+          <br /><br />
+          The world is ending.  Spread the Word!
+        </div>
+      </div>
+      
+      <!-- moral -->
+      <div id="intro_moral">
+        <div class="icn">
+        </div>
+        <h3>Moral Decay</h3>
+        <div class="text">
+          The world is ending!<br /><br />
+          
+          <br /><br />
+          The world is ending.  Spread the Word!
+        </div>
+      </div>
+      
+      <!-- nuke -->
+      <div id="intro_nuke">
+        <div class="icn">
+        </div>
+        <h3>Nuclear Warfare</h3>
+        <div class="text">
+          The world is ending!<br /><br />
+          
+          <br /><br />
+          The world is ending.  Spread the Word!
+        </div>
+      </div>
+      
+      <!-- rap -->
+      <div id="intro_rap">
+        <div class="icn">
+        </div>
+        <h3>The Rapture</h3>
+        <div class="text">
+          The world is ending!<br /><br />
+          
+          <br /><br />
+          The world is ending.  Spread the Word!
+        </div>
+      </div>
+      
+      <!-- warm -->
+      <div id="intro_warm">
+        <div class="icn">
+        </div>
+        <h3>Global Warming</h3>
+        <div class="text">
+          The world is ending!<br /><br />
+          
+          <br /><br />
+          The world is ending.  Spread the Word!
+        </div>
+      </div>
+      
+    </div>
+    <div class="ABRegStats vis">
+      <a href="#" style="float: right;">World Stats</a>
+      <h3>Down Under</h3>
+      <div class="stats total">Total population: <em>30,000,000</em></div>
+      <div class="stats converted">Converted: <em>10,000</em></div>
+      <div class="stats disb">Disbelievers: <em>30,000</em></div>
+      <div class="stats unexposed">Unexposed: <em>26,000,000</em></div>
+      <h4>Actions:</h4>
+      <div class="actions">
+        <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
+        <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
+        <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
+        <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
+        <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
+        <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
+        <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
+      </div>
+    </div>
+    
+    
   </body>
 </head>

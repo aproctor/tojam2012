@@ -47,9 +47,9 @@ var ABGame = {
   
   disaster: null,
   chooseDisaster: function(reference) {
-    alert('Chose '+reference);
+    //alert(I18n.t(reference));
     this.disaster = reference;
-    //ABGame.nextScene();
+    ABGame.nextScene();
   },
   
   restart: function() {
