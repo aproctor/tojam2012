@@ -1,7 +1,7 @@
 var ABGame = {
   DEBUG: {
-    ALL: false,
-    ABScreen: false,
+    ALL: true,
+    Regions: false,
     
     hitboxes: false
   },
@@ -9,17 +9,24 @@ var ABGame = {
   width: 704,
   height: 512,
   grid_size: 25,
-  
-  max_lives: 1,
-  cur_lives: 1,
-  
+    
   curScene: 0,
   scenes: ['splash',
-    'scene1-1',
+    'main-world',
     /* NEW SCENES HERE */
     'game_over'],
-    
-  tile: 'images/tile.jpg',
+  
+  ASSETS: {  
+    tile: 'images/tile.png',
+    NA: 'images/World/NA.png',
+    MA: 'images/World/MA.png',
+    SA: 'images/World/SA.png',
+    AF: 'images/World/AF.png',
+    EU: 'images/World/EU.png',
+    RU: 'images/World/RU.png',
+    MEA: 'images/World/MEA.png',
+    DU: 'images/World/DU.png'
+  },
   
   restart: function() {
     this.curScene = 0;
