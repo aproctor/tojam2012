@@ -34,18 +34,17 @@ Crafty.c("ABRegion", {
     reference: null,
   
     init: function() {
-      this.addComponent("2D, DOM, Text, Image, Mouse");     
+      this.addComponent("2D, DOM, Text, Color, MaskImage, Mouse");     
       this.bind("Click", function(){
         //click
       });         
-      this.attr({x: 0, y: 0, w: ABGame.width, h: ABGame.height});
-      this.textColor("blue");
+      this.attr({x: 0, y: 0});
     },
     
     setup: function() {
-      console.log(this.reference);
-      console.log(ABGame.ASSETS[this.reference])
-         this.image(ABGame.ASSETS[this.reference]);
+       this.mimage(ABGame.ASSETS[this.reference]);
+       this.color("red")
+       this.textColor("#FFF");
     },
     
     setTitle: function(t) {
@@ -65,7 +64,7 @@ Crafty.c("ABRegNA", {
       this.addComponent("ABRegion");
       this.reference = "NA";
       this.setTitle("N.&nbsp;Amer");
-      this.attr({x: 0, y: 85});
+      this.attr({x: 0, y: 86});
     }
 });
 
@@ -74,8 +73,7 @@ Crafty.c("ABRegMA", {
       this.addComponent("ABRegion");
       this.reference = "MA";
       this.setTitle("Mid.&nbsp;Amer");
-      this.attr({
-      });
+      this.attr({x: 33, y: 175});
     }
 });
 
@@ -84,6 +82,7 @@ Crafty.c("ABRegSA", {
       this.addComponent("ABRegion");
       this.reference = "SA";
       this.setTitle("S.&nbsp;Amer");
+      this.attr({x: 105, y: 254});
     }
 });
 
@@ -92,6 +91,7 @@ Crafty.c("ABRegAF", {
       this.addComponent("ABRegion");
       this.reference = "AF";
       this.setTitle("Afrik");
+      this.attr({x: 258, y: 194});
     }
 });
 
@@ -100,6 +100,7 @@ Crafty.c("ABRegEU", {
       this.addComponent("ABRegion");
       this.reference = "EU";
       this.setTitle("Euro");
+      this.attr({x: 282, y: 93});
     }
 });
 
@@ -108,6 +109,7 @@ Crafty.c("ABRegRU", {
       this.addComponent("ABRegion");
       this.reference = "RU";
       this.setTitle("Russia");
+      this.attr({x: 386, y: 88});
     }
 });
 
@@ -116,6 +118,7 @@ Crafty.c("ABRegMEA", {
       this.addComponent("ABRegion");
       this.reference = "MEA";
       this.setTitle("Mid.&nbsp;East&nbsp;Asia");
+      this.attr({x: 357, y: 168});
     }
 });
 
@@ -124,5 +127,6 @@ Crafty.c("ABRegDU", {
       this.addComponent("ABRegion");
       this.reference = "DU";
       this.setTitle("Down&nbsp;Under");
+      this.attr({x: 521, y: 237});
     }
 });
