@@ -5,7 +5,7 @@ Crafty.c("ABMeter", {
     
     this.attr({
       min_val: 0,
-      max_val: 500,
+      max_val: 1000,
       init_val: 0,
       h: 28,
       x: 5*32+2,
