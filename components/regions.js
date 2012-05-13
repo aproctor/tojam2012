@@ -82,14 +82,14 @@ Crafty.c("ABWorld", {
           var l = 65 + Math.random()*8;
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         } else {
-          var h = ((125 - 45.0) * r.conv_rate) + 45;
+          var h = ((135) * r.conv_rate) + 0;
           var s = 96;
-          var l = 55 + Math.random()*18;
+          var l = 55 + Math.random()*8;
           if(r.regSelected && r.regSelected()) {
-            //l += 20;
-            h = 3;
+            l += 20;
+            /*h = 3;
             s = 100;
-            l = 74 + Math.random()*8;
+            l = 74 + Math.random()*8;*/
           }
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         }        
@@ -209,7 +209,7 @@ Crafty.c("ABRegion", {
       var size = pos + neg;
       if(size != 0) {
         var mult = (val < 0)       
-        var newConv = pos / size * 0.5;
+        var newConv = pos / size * 0.7;
         this.conv_rate = newConv;
       }
       

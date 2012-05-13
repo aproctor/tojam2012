@@ -53,6 +53,8 @@ var ABGame = {
     //alert(I18n.t(reference));
     this.disaster = reference;
     this.campaign = Crafty.e("ABCampaign").start(reference);
+    $('#campInfo').css('background-image',"url('images/Disasters/32/"+reference+".png')").children('div').html(I18n.t(reference));
+    
     ABGame.nextScene();
   },
   
