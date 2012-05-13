@@ -42,6 +42,7 @@ Crafty.c("ABCampaign", {
      return false;
    }
    this.updateMoney(this.money - delta);
+   return true;
   },
   
   updateMoney: function(value) {

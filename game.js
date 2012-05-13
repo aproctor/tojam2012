@@ -2,13 +2,15 @@ var ABGame = {
   DEBUG: {
     ALL: true,
     Regions: false,
-    prettyMode: false,
+    prettyMode: true,
     hitboxes: false
   },
   
   width: 704,
   height: 512,
   grid_size: 25,
+  
+  GOLD_PER_CONV: 0.01,
     
   curScene: 0,
   scenes: ['splash',
@@ -77,6 +79,26 @@ var ABGame = {
   tickRate: 1,
   setTickRate: function(val) {
     this.tickRate = val;
+  },
+  
+  /**
+   *
+   */
+  communication: function(comRef,regRef) {
+    var c = this.COMMS[comRef];
+    if(this.campaign.chargeMoney(c.cost)) {
+      if(regRef) {
+        //Update Regional stats
+        this.world.regions[regRef].statsEn.updateStats(c);
+      } else {
+        //GLOBAL
+        this.campaign.updateStats(c);
+        for(var i in this.world.regions) {
+          var r = this.world.regions[i];
+          r.exposure_rate += c.exposure;
+        }
+      }
+    }
   },
   
   COMMS: [],

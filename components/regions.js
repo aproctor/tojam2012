@@ -55,7 +55,9 @@ Crafty.c("ABWorld", {
       
       for(var i in this.regions) {
         var r = this.regions[i];
-               
+        
+        r._reg_tick();
+        
         /*
          * Set Region color based on stats
          */
@@ -66,11 +68,11 @@ Crafty.c("ABWorld", {
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         } else {
           var h = 62; /*45,  0 - 125*/
-	  var s = 96;
-	  var l = 65;
-	  if(r.regSelected && r.regSelected()) {
-	    l += 20;
-	  }
+          var s = 96;
+          var l = 65;
+          if(r.regSelected && r.regSelected()) {
+            l += 20;
+          }
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         }        
       }
@@ -93,6 +95,8 @@ Crafty.c("ABRegion", {
     num_exposed: 0,
     num_converted: 0,
     num_denying: 0,    
+    exposure_rate: 0,
+    conv_rate: 0.5,
   
     init: function() {
       this.addComponent("2D, DOM, MaskImage, Color, Mouse");     
@@ -117,6 +121,26 @@ Crafty.c("ABRegion", {
   		this.color('green');
       this.statsEn = Crafty.e("ABStats");
       this.statsViewEn = Crafty.e("ABRegStats");
+    },
+    
+    _reg_tick: function() {
+      var pop = this.exposure_rate * ABGame.tickRate;
+      if(this.num_exposed + pop > this.population) {
+        pop = this.population - this.num_exposed;
+      }
+      var converted = Math.floor(pop * this.conv_rate);
+      this.num_converted += converted;
+      this.num_denying += pop - converted;
+      
+      this.num_exposed += pop;
+      
+      console.log(this.num_converted);
+      
+      ABGame.campaign.chargeMoney(-1 * this.num_converted * ABGame.GOLD_PER_CONV);
+      
+      if(this.regSelected()) {
+        /* update view components */
+      }
     },
     
     setup: function() {
