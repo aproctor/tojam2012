@@ -90,7 +90,8 @@ var ABGame = {
       if(regRef) {
         //Update Regional stats
         var r = this.world.regions[regRef];
-        console.log(r.statsEn.updateStats(c).compound({}));
+        r.statsEn.updateStats(c);
+        r.exposure_rate += c.exposure;
         r.updateConvRate();
       } else {
         //GLOBAL
