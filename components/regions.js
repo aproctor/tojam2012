@@ -78,18 +78,18 @@ Crafty.c("ABWorld", {
          */
         if(ABGame.DEBUG.prettyMode === true) {
           var h = 20 + Math.random()*150;
-          var s = 70;
+          var s = 100;
           var l = 65 + Math.random()*8;
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         } else {
           var h = ((125 - 45.0) * r.conv_rate) + 45;
           var s = 96;
-          var l = 55;
+          var l = 55 + Math.random()*18;
           if(r.regSelected && r.regSelected()) {
             //l += 20;
             h = 3;
             s = 100;
-            l = 74;
+            l = 74 + Math.random()*8;
           }
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         }        
