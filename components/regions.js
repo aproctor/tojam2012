@@ -203,10 +203,3 @@ Crafty.c("ABRegDU", {
       this.attr({x: 521, y: 237, population: 30*POPULATION_UNIT});
     }
 });
-
-Crafty.scene('main-world', function() {
-  ABGame.world = Crafty.e('ABWorld');
-  
-  $("#intro_"+ABGame.disaster).toggle();
-});
-

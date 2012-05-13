@@ -11,10 +11,11 @@ Crafty.c("ABMeter", {
       x: 5*32+2,
       y: 15*32+2,
       z: 100,
+      val: 0,
+      w: 0,
+      max_width: 17*32 - 4,
       barcolor: 'lightGreen'
     });
-    this.max_width = 14*32 - 4;
-    this.w = this.max_width;
   },
   
   start: function(color, attrs) {
