@@ -2,7 +2,7 @@ var ABGame = {
   DEBUG: {
     ALL: true,
     Regions: false,
-    prettyMode: true,
+    prettyMode: false,
     hitboxes: false
   },
   
@@ -89,13 +89,14 @@ var ABGame = {
     if(this.campaign.chargeMoney(c.cost)) {
       if(regRef) {
         //Update Regional stats
-        this.world.regions[regRef].statsEn.updateStats(c);
+        this.world.regions[regRef].statsEn.updateStats(c).updateConvRate();
       } else {
         //GLOBAL
         this.campaign.updateStats(c);
         for(var i in this.world.regions) {
           var r = this.world.regions[i];
           r.exposure_rate += c.exposure;
+          r.updateConvRate();
         }
       }
     }

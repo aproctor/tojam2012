@@ -82,9 +82,9 @@ Crafty.c("ABStats",{
    */
   compound: function(anotherStats) {
     return {
-      p: this.p + anotherStats.p || 0,
-      l: this.l + anotherStats.l || 0,
-      i: this.i + anotherStats.i || 0
+      p: ((this.p || 0) + (anotherStats.p || 0)),
+      l: ((this.l || 0) + (anotherStats.l || 0)),
+      i: ((this.i || 0) + (anotherStats.i || 0))
     };
   },
 });
@@ -111,6 +111,7 @@ Crafty.c("ABCommunication",{
          cost: 3000,
          exposure: 3000
        });
+       this.updateStats(ABGame.TAGS.lib);
      } else if(ref == "int") {
        this.attr({
          title: "Internet",
@@ -118,31 +119,38 @@ Crafty.c("ABCommunication",{
          exposure: 100,
          global: true
        });
+       this.updateStats(ABGame.TAGS.crazy);
      } else if(ref == "lobby") {
-	this.attr({
+       this.attr({
          title: "Lobby Govt.",
          cost: 5000000,
          exposure: 5000000,
        });
+       this.updateStats(ABGame.TAGS.cor);
+       this.updateStats(ABGame.TAGS.cor);
+       this.updateStats(ABGame.TAGS.cor);
      } else if(ref == "pamph") {
        this.attr({
          title: "Pamphlets",
          cost: 100,
          exposure: 100,
        });
+       this.updateStats(ABGame.TAGS.crazy);
      } else if(ref == "prop") {
-	this.attr({
-         title: "Lobby Govt.",
+       this.attr({
+         title: "Propaganda",
          cost: 800000,
          exposure: 100000,
          global: true
        });
+       this.updateStats(ABGame.TAGS.simple);
      } else if(ref == "radio") {
 	this.attr({
          title: "Talk Radio",
          cost: 2000,
          exposure: 2000,
        });
+       this.updateStats(ABGame.TAGS.con);
      } else if(ref == "tele") {
 	this.attr({
          title: "Television",
@@ -150,6 +158,7 @@ Crafty.c("ABCommunication",{
          exposure: 10000,
          global: true
        });
+       this.updateStats(ABGame.TAGS.simple);
      } else if(ref == "verbal") {
 	this.attr({
          title: "Verbal",

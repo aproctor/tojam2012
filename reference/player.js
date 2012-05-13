@@ -77,7 +77,6 @@ Crafty.c("ABPlayer", {
      },
      
      kill: function() {
-       console.log('kill');
        ABGame.cur_lives -= 1;
        if(ABGame.cur_lives < 0) {
          ABGame.gameOver();

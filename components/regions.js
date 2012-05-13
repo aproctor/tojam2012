@@ -11,17 +11,17 @@ Crafty.c("ABWorld", {
     this.image(ABGame.ASSETS.tile, "repeat");
     
     this.regions = {};
-    this.regions.NA = Crafty.e('ABRegNA');
-    this.regions.MA = Crafty.e('ABRegMA');
-    this.regions.SA = Crafty.e('ABRegSA');
+    this.regions.NA = Crafty.e('ABRegNA').updateConvRate();
+    this.regions.MA = Crafty.e('ABRegMA').updateConvRate();
+    this.regions.SA = Crafty.e('ABRegSA').updateConvRate();
     
-    this.regions.AF = Crafty.e('ABRegAF');
+    this.regions.AF = Crafty.e('ABRegAF').updateConvRate();
     
-    this.regions.EU = Crafty.e('ABRegEU');
-    this.regions.RU = Crafty.e('ABRegRU');
-    this.regions.MEA = Crafty.e('ABRegMEA');
+    this.regions.EU = Crafty.e('ABRegEU').updateConvRate();
+    this.regions.RU = Crafty.e('ABRegRU').updateConvRate();
+    this.regions.MEA = Crafty.e('ABRegMEA').updateConvRate();
     
-    this.regions.DU = Crafty.e('ABRegDU');
+    this.regions.DU = Crafty.e('ABRegDU').updateConvRate();
     
     this.time_bar = Crafty.e('ABMeter').start({x: 10, y: 600});
     
@@ -67,7 +67,7 @@ Crafty.c("ABWorld", {
           var l = 65 + Math.random()*8;
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         } else {
-          var h = 62; /*45,  0 - 125*/
+          var h = ((125 - 45.0) * r.conv_rate) + 45;
           var s = 96;
           var l = 65;
           if(r.regSelected && r.regSelected()) {
@@ -96,7 +96,7 @@ Crafty.c("ABRegion", {
     num_converted: 0,
     num_denying: 0,    
     exposure_rate: 0,
-    conv_rate: 0.5,
+    conv_rate: 0.2,
   
     init: function() {
       this.addComponent("2D, DOM, MaskImage, Color, Mouse");     
@@ -142,6 +142,7 @@ Crafty.c("ABRegion", {
         $(pref + ' .converted em').html(this.num_converted.formatMoney(0,'.',','));
         $(pref + ' .disb em').html(this.num_denying.formatMoney(0,'.',','));
         $(pref + ' .unexposed em').html((this.population - this.num_exposed).formatMoney(0,'.',','));
+        $(pref + ' .ratio em').html(this.conv_rate.formatMoney(2,'.',','))
       }
     },
     
@@ -155,6 +156,30 @@ Crafty.c("ABRegion", {
     
     regSelected: function() {
     	return ABGame.world.selectedRegionRef == this.reference;
+    },
+    
+    updateConvRate: function() {
+      var stats = this.statsEn.compound(ABGame.campaign);
+      var val = 0;
+      var pos = 0;
+      var neg = 0;
+      for(var s in stats) {
+        var v = stats[s] * (this.dispoStats.attr(s) || 0);
+        if(v < 0) {
+          neg += -1*v;
+        } else {
+          pos += v;
+        }
+        val += v;
+      }
+      var size = pos + neg;
+      if(size != 0) {
+        var mult = (val < 0)       
+        var newConv = pos / size * 0.5;
+        this.conv_rate = newConv;
+      }
+      
+      return this;
     },
     
     
@@ -259,7 +284,7 @@ Crafty.c("ABRegDU", {
     init: function() {
       this.addComponent("ABRegion");
       this.reference = "DU";
-      this.setTitle("Down&nbsp;Under");
+      this.setTitle("Australia");
       this.attr({x: 521, y: 237, population: 30*POPULATION_UNIT, t_xoffset: 0, t_yoffset: 85});
       this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.con).updateStats(ABGame.TAGS.simple);
     }
