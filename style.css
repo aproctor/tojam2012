@@ -41,17 +41,17 @@
       top: 530px;
       left: 14px;
       z-index: 20;
-      background: #CCC;
     }
 
     #controls a {
       display: inline-block;
       margin: 1px;
+      text-decoration: none;
     }
     #controls a div {
       color: '#90EE90';
-      width: 30px;
-      height: 30px;
+      width: 24px;
+      height: 24px;
       overflow: hidden;
       text-align: center;
       line-height: 30px;
