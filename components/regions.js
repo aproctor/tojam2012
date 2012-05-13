@@ -256,7 +256,7 @@ Crafty.c("ABRegAF", {
       this.addComponent("ABRegion");
       this.reference = "AF";
       this.setTitle("Africa");
-      this.attr({x: 258, y: 194, population: 300*POPULATION_UNIT});
+      this.attr({x: 258, y: 194, population: 400*POPULATION_UNIT});
       this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.rel).updateStats(ABGame.TAGS.simple);
     }
 });
@@ -266,7 +266,7 @@ Crafty.c("ABRegEU", {
       this.addComponent("ABRegion");
       this.reference = "EU";
       this.setTitle("Euro");
-      this.attr({x: 282, y: 93, population: 200*POPULATION_UNIT});
+      this.attr({x: 282, y: 93, population: 300*POPULATION_UNIT});
       this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.lib).updateStats(ABGame.TAGS.free).updateStats(ABGame.TAGS.cor);
     }
 });
@@ -276,7 +276,7 @@ Crafty.c("ABRegRU", {
       this.addComponent("ABRegion");
       this.reference = "RU";
       this.setTitle("Russia");
-      this.attr({x: 386, y: 88, population: 300*POPULATION_UNIT});
+      this.attr({x: 386, y: 88, population: 400*POPULATION_UNIT});
       this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.cor).updateStats(ABGame.TAGS.cor);
     }
 });
@@ -286,7 +286,7 @@ Crafty.c("ABRegMEA", {
       this.addComponent("ABRegion");
       this.reference = "MEA";
       this.setTitle("Mid.&nbsp;East&nbsp;Asia");
-      this.attr({x: 357, y: 168, population: 500*POPULATION_UNIT});
+      this.attr({x: 357, y: 168, population: 5000*POPULATION_UNIT});
       this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.rel).updateStats(ABGame.TAGS.rel).updateStats(ABGame.TAGS.crazy);      
     }
 });
