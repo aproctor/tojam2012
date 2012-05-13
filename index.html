@@ -1,15 +1,15 @@
 <html>
   <head>
   <title>Tojam 2012</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+  <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script -->
   <!-- script type="text/javascript" src="http://craftyjs.com/release/0.4.5/crafty-min.js"></script -->
+  <script src="jquery.min.js"></script>
   <script type="text/javascript" src="crafty.js"></script>
   <script type="text/javascript" src="game.js"></script>
   <script type="text/javascript" src="I18n.js"></script>
-    <script type="text/javascript" src="components/graphics.js"></script>
-  <script type="text/javascript" src="components/player.js"></script>
+  <script type="text/javascript" src="components/graphics.js"></script>
   <script type="text/javascript" src="components/regions.js"></script>
-    <script type="text/javascript" src="components/disasters.js"></script>
+  <script type="text/javascript" src="components/disasters.js"></script>
   <script type="text/javascript" src="scenes/splash.js"></script>
   <script type="text/javascript" src="scenes/ui.js"></script>
   <style>
@@ -29,6 +29,28 @@
 
     .clearfix {
     	display: inline-block;
+    }
+    
+    #controls {
+      position: absolute;
+      display: none;
+      top: 490px;
+      left: 14px;
+      z-index: 20;
+      background: #CCC;
+    }
+    
+    #controls a {
+      display: inline-block;
+      margin: 1px;
+    }
+    #controls a div {
+      color: '#90EE90';
+      width: 30px;
+      height: 30px;
+      overflow: hidden;
+      text-align: center;
+      line-height: 30px;
     }
   
     .ABRegion, .ABDisasterChoice {
@@ -231,7 +253,7 @@
       </div>
       
     </div>
-    <div class="ABRegStats vis">
+    <div class="ABRegStats">
       <a href="#" style="float: right;">World Stats</a>
       <h3>Down Under</h3>
       <div class="stats total">Total population: <em>30,000,000</em></div>
@@ -248,6 +270,12 @@
         <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
         <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
       </div>
+    </div>
+    <div id="controls">
+      <a href="#" class="pause" onclick="Crafty.pause(); $(this).toggleClass('paused'); return false;"><div>||</div></a>
+      <a href="#" class="1x" onclick="ABGame.setTickRate(1); Crafty.pause(false); return false;"><div>1x</div></a>
+      <a href="#" class="2x" onclick="ABGame.setTickRate(2); Crafty.pause(false); return false;"><div>2x</div></a>
+      <a href="#" class="10x" onclick="ABGame.setTickRate(10); Crafty.pause(false); return false;"><div>10x</div></a>
     </div>
     
     

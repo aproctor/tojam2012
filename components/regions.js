@@ -2,6 +2,7 @@ var POPULATION_UNIT = 1000000;
 
 Crafty.c("ABWorld", {
   regions: null,
+  time_bar: null,
   population: 0,
   
   init: function() {
@@ -22,6 +23,8 @@ Crafty.c("ABWorld", {
     
     this.regions.DU = Crafty.e('ABRegDU');
     
+    this.time_bar = Crafty.e('ABMeter').start({x: 10, y: 600});
+    
     for(var r in this.regions) {
       this.regions[r].setup();
       this.population += this.regions[r].population;
@@ -32,6 +35,7 @@ Crafty.c("ABWorld", {
   
   selectedRegionRef: null,
   selectRegion: function(ref) {
+    //TODO if null, set world stats
     $('.ABRegStats.vis').removeClass('vis');
 
     $('#stats_'+ref).addClass('vis');    
@@ -39,10 +43,30 @@ Crafty.c("ABWorld", {
     this.selectedRegionRef = ref;
   },
   
-    
-  i: 0,
-  _ABWorld_enterframe: function () {
-    console.log(this.i++);
+  
+  tick: 0,
+  lastFrame: 0,
+  _ABWorld_enterframe: function (e) {
+    if(e.frame - this.lastFrame >= 15) {
+      this.lastFrame = e.frame;
+      this.tick += ABGame.tickRate;
+      
+      this.time_bar.setVal(this.tick)
+      
+      for(var i in this.regions) {
+        var r = this.regions[i];
+        
+        //TODO come back here -- r._ABRegion_
+        
+        /*
+         * Set Region color based on stats
+         */
+        var h = 20 + Math.random()*150;
+        var s = (90 - 40)*(this.tick / 500) + 40;
+        var l = 65 + Math.random()*8;
+        r.color('hsl('+h+','+s+'%,'+l+'%)');
+      }
+    }
 	},
   
   toString: function() {
@@ -59,10 +83,10 @@ Crafty.c("ABRegion", {
     num_exposed: 0,
   
     init: function() {
-      this.addComponent("2D, DOM, Image, Mouse");     
+      this.addComponent("2D, DOM, MaskImage, Color, Mouse");     
       this.bind("Click", function(){
         //click
-        //alert(this.title);
+        alert(this.title);
       });         
       this.attr({x: 0, y: 0});
       
@@ -75,6 +99,7 @@ Crafty.c("ABRegion", {
   		this.bind("Draw", draw).bind("RemoveComponent", function (id) {
   			if (id === "Image") this.unbind("Draw", draw);
   		});*/
+  		this.color('green');
     },
     
     setup: function() {
@@ -112,7 +137,7 @@ Crafty.c("ABRegNA", {
       this.addComponent("ABRegion");
       this.reference = "NA";
       this.setTitle("N.&nbsp;Amer");
-      this.attr({x: 0, y: 86, population: 80*POPULATION_UNIT});
+      this.attr({x: 1, y: 87, population: 80*POPULATION_UNIT});
     }
 });
 
@@ -138,7 +163,7 @@ Crafty.c("ABRegAF", {
     init: function() {
       this.addComponent("ABRegion");
       this.reference = "AF";
-      this.setTitle("Afrik");
+      this.setTitle("Africa");
       this.attr({x: 258, y: 194, population: 300*POPULATION_UNIT});
     }
 });
@@ -178,3 +203,10 @@ Crafty.c("ABRegDU", {
       this.attr({x: 521, y: 237, population: 30*POPULATION_UNIT});
     }
 });
+
+Crafty.scene('main-world', function() {
+  ABGame.world = Crafty.e('ABWorld');
+  
+  $("#intro_"+ABGame.disaster).toggle();
+});
+

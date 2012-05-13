@@ -1,3 +1,72 @@
+Crafty.c("ABMeter", {
+  
+  init: function() {
+    this.addComponent("2D, DOM, Color");
+    
+    this.attr({
+      min_val: 0,
+      max_val: 300,
+      init_val: 0,
+      h: 28,
+      x: 5*32+2,
+      y: 15*32+2,
+      z: 100,
+      barcolor: 'lightGreen'
+    });
+    this.max_width = 14*32 - 4;
+    this.w = this.max_width;
+  },
+  
+  start: function(color, attrs) {
+    if(attrs) {
+      this.attr(attrs);
+    }
+    
+    this.val = this.attr('init_val');
+    
+    var border = 2;
+    Crafty.e("2D, DOM, Color").attr({w: this.w+2*border, h: this.h+2*border, x: this.x-border, y: this.y-border, z: 1}).color("#000000");
+    this.color(this.attr('barcolor'));
+    
+    return this;
+  },
+  
+  deltaVal: function(amt) {
+    var target = this.val + amt;
+    if(target < this.min_val) {
+      target = this.min_val;
+    }
+    if(target > this.max_val) {
+      target = this.max_val;
+    }
+    this.setVal(target);
+  },
+  
+  setVal: function(amt) {
+    var pct = (amt - this.min_val) / (this.max_val - this.min_val);
+    this.w = pct * this.max_width;
+  },
+  
+  toString: function() {
+    return "ABMeter";
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**@
 * #Image
 * @category Graphics

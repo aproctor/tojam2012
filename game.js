@@ -72,6 +72,11 @@ var ABGame = {
     Crafty.scene('game_over');
   },
   
+  tickRate: 1,
+  setTickRate: function(val) {
+    this.tickRate = val;
+  },
+  
   toString: function() {
     return "ABGame";
   }

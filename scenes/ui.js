@@ -1,9 +1,3 @@
-Crafty.scene('main-world', function() {
-  ABGame.world = Crafty.e('ABWorld');
-  
-  $("#intro_"+ABGame.disaster).toggle();
-});
-
 Crafty.c("ABDisasterChoice", {
   ref: null,
   icon: null,
@@ -26,7 +20,26 @@ Crafty.c("ABDisasterChoice", {
   },
   
   toString: function() {
-    return "";
+    return "ABDisasterChoice";
+  }
+});
+
+
+Crafty.c("ABRegStats", {
+  init: function() {
+    this.attr({
+      visible: false
+    });
+  },
+  
+  setup: function(attrs) {
+    this.attr(attrs);
+  },
+  
+  
+  
+  toString: function() {
+    return "ABRegStats";
   }
 });
 
