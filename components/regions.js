@@ -84,12 +84,12 @@ Crafty.c("ABWorld", {
         } else {
           var h = ((125 - 45.0) * r.conv_rate) + 45;
           var s = 96;
-          var l = 65;
+          var l = 55;
           if(r.regSelected && r.regSelected()) {
             //l += 20;
             h = 3;
-            s = 82;
-            l = 97;
+            s = 100;
+            l = 74;
           }
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         }        
