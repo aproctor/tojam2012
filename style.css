@@ -199,4 +199,18 @@
 		left: 0px;
 		display: none;
 	}
+  .commLink {
+    padding-left: 34px;
+    background-repeat: no-repeat;
+    line-height: 32px;
+  }
 
+
+  #money {
+    color: green;
+    position: absolute;
+    top: 509;
+    left: 741;
+    font-size: 32px;
+    z-index: 999;
+  }

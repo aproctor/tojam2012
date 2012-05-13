@@ -38,9 +38,9 @@ Crafty.c("ABWorld", {
     //TODO if null, set world stats
     $('.ABRegStats.vis').removeClass('vis');
 
-    $('#stats_'+ref).addClass('vis');    
+    $('#reg_stats_'+ref||"world").addClass('vis');    
     
-    this.selectedRegionRef = ref;
+    this.selectedRegionRef = ref || null;
   },
   
   
@@ -55,9 +55,7 @@ Crafty.c("ABWorld", {
       
       for(var i in this.regions) {
         var r = this.regions[i];
-        
-        //TODO come back here -- r._ABRegion_
-        
+               
         /*
          * Set Region color based on stats
          */
@@ -66,7 +64,15 @@ Crafty.c("ABWorld", {
           var s = (90 - 40)*(this.wtick / 500) + 40;
           var l = 65 + Math.random()*8;
           r.color('hsl('+h+','+s+'%,'+l+'%)');
-        }
+        } else {
+          var h = 62; /*45,  0 - 125*/
+	  var s = 96;
+	  var l = 65;
+	  if(r.regSelected && r.regSelected()) {
+	    l += 20;
+	  }
+          r.color('hsl('+h+','+s+'%,'+l+'%)');
+        }        
       }
     }
   },
@@ -91,8 +97,7 @@ Crafty.c("ABRegion", {
     init: function() {
       this.addComponent("2D, DOM, MaskImage, Color, Mouse");     
       this.bind("Click", function(){
-        //click
-        //alert(this.title);
+        ABGame.world.selectRegion(this.reference);
       });         
       this.attr({x: 0,
       	 y: 0,
@@ -119,9 +124,11 @@ Crafty.c("ABRegion", {
        this.titleEn = Crafty.e("ABRegText");
        this.titleEn.text(this.title);
        this.titleEn.setup(this);
-       console.log('1');
        this.statsViewEn.setup(this);
-       console.log('2');
+    },
+    
+    regSelected: function() {
+    	return ABGame.world.selectedRegionRef == this.reference;
     },
     
     

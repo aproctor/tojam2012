@@ -67,14 +67,7 @@ Crafty.c("ABRegStats", {
     for(var c in ABGame.COMMS) {
       buffer.push(ABGame.COMMS[c].renderLink(false));
     }
-    //buffer.push('<a href="#" onclick="ABGame.communication(\'pamphlets\'); return false;">Buy Pamphlets<em>$300,000</em></a>');
-/*            <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
-            <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
-            <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
-            <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
-            <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
-            <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
-            */
+
     buffer.push('</div></div>');
     
     $('body').append(buffer.join(''));

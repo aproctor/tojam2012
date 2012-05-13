@@ -1,5 +1,6 @@
 Crafty.c("ABCampaign", {
   ref: null,
+  money: 0,
   
   init: function() {
     this.addComponent("ABStats");
@@ -11,6 +12,8 @@ Crafty.c("ABCampaign", {
     this.ref = ref;
     this.attr(attrs || {});
     this.getInitStatsForRef(this.ref);
+    
+    this.updateMoney(300);
     
     return this;
   },
@@ -32,6 +35,18 @@ Crafty.c("ABCampaign", {
       this.updateStats(ABGame.TAGS.lib);
       this.updateStats(ABGame.TAGS.rat);
     }
+  },
+  
+  chargeMoney: function(delta) {
+   if(this.money < delta) {
+     return false;
+   }
+   this.updateMoney(this.money - delta);
+  },
+  
+  updateMoney: function(value) {
+   this.money = value;
+   $('#money').html('$'+(this.money).formatMoney(0,'.',',')); //sorry
   },
   
   toString: function() {
@@ -153,7 +168,9 @@ Crafty.c("ABCommunication",{
      if(global === true && this.global === true || global === false && this.global === false) {
        buff.push('<a href="#" onclick="ABGame.communication(\'');
        buff.push(this.ref);
-       buff.push('\'); return false;">');
+       buff.push('\'); return false;" class="commLink" style="background-image: url(\'images/Comms/');
+       buff.push(this.ref);
+       buff.push('.png\')">');
        buff.push(this.title);
        buff.push('<em>$');
        buff.push(this.cost);
