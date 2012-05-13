@@ -77,6 +77,8 @@ var ABGame = {
     this.tickRate = val;
   },
   
+  COMMS: [],
+  
   toString: function() {
     return "ABGame";
   }
@@ -90,4 +92,13 @@ window.onload = (function() {
   Crafty.init(ABGame.width+324, ABGame.height);
   Crafty.background('#000');
   Crafty.scene("splash");
+  
+  Crafty.e("ABCommunication").setup("verbal");
+  Crafty.e("ABCommunication").setup("pamph");
+  Crafty.e("ABCommunication").setup("int");
+  Crafty.e("ABCommunication").setup("radio");
+  Crafty.e("ABCommunication").setup("ed");
+  Crafty.e("ABCommunication").setup("tele");
+  Crafty.e("ABCommunication").setup("lobby");
+  Crafty.e("ABCommunication").setup("prop");
 });

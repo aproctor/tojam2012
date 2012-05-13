@@ -119,7 +119,9 @@ Crafty.c("ABRegion", {
        this.titleEn = Crafty.e("ABRegText");
        this.titleEn.text(this.title);
        this.titleEn.setup(this);
+       console.log('1');
        this.statsViewEn.setup(this);
+       console.log('2');
     },
     
     
