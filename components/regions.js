@@ -69,7 +69,7 @@ Crafty.c("ABWorld", {
         }
       }
     }
-	},
+  },
   
   toString: function() {
     return "ABWorld<>";
@@ -80,17 +80,25 @@ Crafty.c("ABRegion", {
     title: null,
     reference: null,
     titleEn: null,
+    statsEn: null,
+    statsViewEn: null,
     
-    population: 1,
+    population: 1000000,
     num_exposed: 0,
+    num_converted: 0,
+    num_denying: 0,    
   
     init: function() {
       this.addComponent("2D, DOM, MaskImage, Color, Mouse");     
       this.bind("Click", function(){
         //click
-        alert(this.title);
+        //alert(this.title);
       });         
-      this.attr({x: 0, y: 0});
+      this.attr({x: 0,
+      	 y: 0,
+      	 t_xoffset: 50,
+         t_yoffset: 50
+       });
       
       /*
        * Draw Func
@@ -102,6 +110,8 @@ Crafty.c("ABRegion", {
   			if (id === "Image") this.unbind("Draw", draw);
   		});*/
   		this.color('green');
+      this.statsEn = Crafty.e("ABStats");
+      this.statsViewEn = Crafty.e("ABRegStats");
     },
     
     setup: function() {
@@ -109,6 +119,7 @@ Crafty.c("ABRegion", {
        this.titleEn = Crafty.e("ABRegText");
        this.titleEn.text(this.title);
        this.titleEn.setup(this);
+       this.statsViewEn.setup(this);
     },
     
     
@@ -130,16 +141,22 @@ Crafty.c("ABRegText", {
   },
   setup: function(region) {
     this.region = region;
-    this.attr({x: region._x + 50, y: this.region._y + 50});
+    this.attr({x: region._x + region.t_xoffset, y: this.region._y + region.t_yoffset});
   }
 });
 
+/*
+ * DISCLAIMER: The stats bellow do not represent any political views or personal opinions
+ * they are just for a simulation and parody.  Please don't be upset as numbers have been
+ * thrown around for balance and effect rather than any real world similarity.
+ */
 Crafty.c("ABRegNA", {
     init: function() {
       this.addComponent("ABRegion");
       this.reference = "NA";
       this.setTitle("N.&nbsp;Amer");
       this.attr({x: 1, y: 87, population: 80*POPULATION_UNIT});
+      this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.lib).updateStats(ABGame.TAGS.crazy);
     }
 });
 
@@ -149,6 +166,7 @@ Crafty.c("ABRegMA", {
       this.reference = "MA";
       this.setTitle("Mid.&nbsp;Amer");
       this.attr({x: 33, y: 175, population: 160*POPULATION_UNIT});
+      this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.con).updateStats(ABGame.TAGS.rel).updateStats(ABGame.TAGS.crazy);
     }
 });
 
@@ -158,6 +176,7 @@ Crafty.c("ABRegSA", {
       this.reference = "SA";
       this.setTitle("S.&nbsp;Amer");
       this.attr({x: 105, y: 254, population: 200*POPULATION_UNIT});
+      this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.rel).updateStats(ABGame.TAGS.crazy);
     }
 });
 
@@ -167,6 +186,7 @@ Crafty.c("ABRegAF", {
       this.reference = "AF";
       this.setTitle("Africa");
       this.attr({x: 258, y: 194, population: 300*POPULATION_UNIT});
+      this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.rel).updateStats(ABGame.TAGS.simple);
     }
 });
 
@@ -176,6 +196,7 @@ Crafty.c("ABRegEU", {
       this.reference = "EU";
       this.setTitle("Euro");
       this.attr({x: 282, y: 93, population: 200*POPULATION_UNIT});
+      this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.lib).updateStats(ABGame.TAGS.free).updateStats(ABGame.TAGS.cor);
     }
 });
 
@@ -185,6 +206,7 @@ Crafty.c("ABRegRU", {
       this.reference = "RU";
       this.setTitle("Russia");
       this.attr({x: 386, y: 88, population: 300*POPULATION_UNIT});
+      this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.cor).updateStats(ABGame.TAGS.cor);
     }
 });
 
@@ -194,6 +216,7 @@ Crafty.c("ABRegMEA", {
       this.reference = "MEA";
       this.setTitle("Mid.&nbsp;East&nbsp;Asia");
       this.attr({x: 357, y: 168, population: 500*POPULATION_UNIT});
+      this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.rel).updateStats(ABGame.TAGS.rel).updateStats(ABGame.TAGS.crazy);      
     }
 });
 
@@ -202,6 +225,7 @@ Crafty.c("ABRegDU", {
       this.addComponent("ABRegion");
       this.reference = "DU";
       this.setTitle("Down&nbsp;Under");
-      this.attr({x: 521, y: 237, population: 30*POPULATION_UNIT});
+      this.attr({x: 521, y: 237, population: 30*POPULATION_UNIT, t_xoffset: 0, t_yoffset: 85});
+      this.dispoStats = Crafty.e("ABStats").updateStats(ABGame.TAGS.con).updateStats(ABGame.TAGS.simple);
     }
 });

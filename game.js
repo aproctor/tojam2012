@@ -82,11 +82,12 @@ var ABGame = {
   }
 };
 
+
 /**
  * On page load
  */
 window.onload = (function() {
-  Crafty.init(ABGame.width, ABGame.height);
-  Crafty.background('#111');
+  Crafty.init(ABGame.width+324, ABGame.height);
+  Crafty.background('#000');
   Crafty.scene("splash");
 });
