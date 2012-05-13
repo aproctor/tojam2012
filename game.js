@@ -2,7 +2,7 @@ var ABGame = {
   DEBUG: {
     ALL: true,
     Regions: false,
-    
+    prettyMode: true,
     hitboxes: false
   },
   

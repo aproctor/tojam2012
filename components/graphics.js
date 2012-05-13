@@ -13,7 +13,7 @@ Crafty.c("ABMeter", {
       z: 100,
       val: 0,
       w: 0,
-      max_width: 17*32 - 4,
+      max_width: 16*32 - 4,
       barcolor: 'lightGreen'
     });
   },
@@ -44,8 +44,11 @@ Crafty.c("ABMeter", {
   },
   
   setVal: function(amt) {
-    var pct = (amt - this.min_val) / (this.max_val - this.min_val);
-    this.w = pct * this.max_width;
+    if(this.val != amt) {
+      this.val = amt;
+      var pct = (amt - this.min_val) * 1.0 / (this.max_val - this.min_val);
+      this.w = pct * this.max_width;
+    }
   },
   
   toString: function() {

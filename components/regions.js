@@ -44,14 +44,14 @@ Crafty.c("ABWorld", {
   },
   
   
-  tick: 0,
+  wtick: 0,
   lastFrame: 0,
   _ABWorld_enterframe: function (e) {
     if(e.frame - this.lastFrame >= 15) {
       this.lastFrame = e.frame;
-      this.tick += ABGame.tickRate;
+      this.wtick += ABGame.tickRate;
       
-      this.time_bar.setVal(this.tick)
+      this.time_bar.deltaVal(ABGame.tickRate);
       
       for(var i in this.regions) {
         var r = this.regions[i];
@@ -61,10 +61,12 @@ Crafty.c("ABWorld", {
         /*
          * Set Region color based on stats
          */
-        var h = 20 + Math.random()*150;
-        var s = (90 - 40)*(this.tick / 500) + 40;
-        var l = 65 + Math.random()*8;
-        r.color('hsl('+h+','+s+'%,'+l+'%)');
+        if(ABGame.DEBUG.prettyMode === true) {
+          var h = 20 + Math.random()*150;
+          var s = (90 - 40)*(this.wtick / 500) + 40;
+          var l = 65 + Math.random()*8;
+          r.color('hsl('+h+','+s+'%,'+l+'%)');
+        }
       }
     }
 	},

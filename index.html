@@ -12,189 +12,7 @@
   <script type="text/javascript" src="components/disasters.js"></script>
   <script type="text/javascript" src="scenes/splash.js"></script>
   <script type="text/javascript" src="scenes/ui.js"></script>
-  <style>
-
-  @font-face{font-family:'Gill Sans W01 Bold';src:url('fonts/GSBold.woff') format('woff');}
-  @font-face{font-family:'Gill Sans W01 Medium';src:url('fonts/GSMed.woff') format('woff');}
-  body {font-family:'Gill Sans W01 Medium'; }
-  .bold {font-family:'Gill Sans W01 Bold';}
-
-   </style>
-
-  <style>
-    * {
-
-      font-weight: bold;
-    }
-
-    body {
-     background: black;
-     margin: 0;
-     padding: 0;
-    }
-
-    #cr-stage {
-     margin: 50px 10px;
-    }
-
-    .clearfix:after {
-    	content: ".";
-    	display: block;
-    	clear: both;
-    	visibility: hidden;
-    	line-height: 0;
-    	height: 0;
-    }
-
-    .clearfix {
-    	display: inline-block;
-    }
-
-    #controls {
-      position: absolute;
-      display: none;
-      top: 530px;
-      left: 14px;
-      z-index: 20;
-      background: #CCC;
-    }
-
-    #controls a {
-      display: inline-block;
-      margin: 1px;
-    }
-    #controls a div {
-      color: '#90EE90';
-      width: 30px;
-      height: 30px;
-      overflow: hidden;
-      text-align: center;
-      line-height: 30px;
-    }
-
-    .ABRegion, .ABDisasterChoice {
-      //border: 2px solid yellow;
-    }
-
-    .ABRegStats {
-      position: absolute;
-      display: none;
-      background: #333;
-      border: 2px solid 666;
-      width: 260px;
-      z-index: 99;
-      padding: 15px 15px;
-      color: white;
-      top: 8px;
-      left: 712;
-    }
-    .ABRegStats.vis {
-      display: block;
-    }
-
-    .ABRegStats h3 {
-      margin-top: 0;
-      font-size: 20px;
-      color: lightBlue;
-    }
-
-    .ABRegStats .stats {
-      font-size: 18px;
-      width: 260px;
-    }
-    .ABRegStats .stats em {
-      float: right;
-    }
-    .ABRegStats .total {
-      color: #CCC;
-    }
-    .ABRegStats .converted {
-      color: lightGreen;
-    }
-    .ABRegStats .disb {
-      color: red;
-    }
-    .ABRegStats .unexposed {
-      color: #CCC;
-    }
-
-    .ABRegStats .actions a {
-      width: 260px;
-      color: lightBlue;
-      float: left;
-      clear: both;
-    }
-
-    .ABRegStats .actions a em {
-      float: right;
-    }
-
-
-
-    .ABRegText {
-      color: lightBlue;
-      z-index: 999;
-      font-size: 25;
-      line-height: 100%;
-      text-align: center;
-      text-shadow: 2px 2px 0px black;
-    }
-
-    .intros > * {
-      position: absolute;
-      display: none;
-      background: rgba(240,240,240,0.8);
-      box-shadow: 1px 1px 20px #EEB01D;
-      border-radius: 5px;
-      width: 495px;
-      margin: 80px 83px;
-      z-index: 99;
-      padding: 15px 15px;
-    }
-
-    .intros > * h3 {
-      margin-top: 0px;
-    }
-
-    .intros .icn {
-      width: 96px;
-      height: 128px;
-      float: left;
-      margin-right: 20px;
-    }
-
-    #intro_alien .icn {
-      background: url('images/Disasters/96/alien.png');
-    }
-
-    #intro_com .icn {
-      background: url('images/Disasters/96/com.png');
-    }
-
-    #intro_moral .icn {
-      background: url('images/Disasters/96/moral.png');
-    }
-
-    #intro_nuke .icn {
-      background: url('images/Disasters/96/nuke.png');
-    }
-
-    #intro_rap .icn {
-      background: url('images/Disasters/96/rap.png');
-    }
-
-    #intro_warm .icn {
-      background: url('images/Disasters/96/warm.png');
-    }
-
-    #logo {
-	    position: absolute;
-		top: 0;
-		left: 0px;
-		display: none;
-	}
-
-  </style>
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
   	<img id="logo" src="images/title.png"/>
@@ -280,14 +98,14 @@
       </div>
 
     </div>
-    <div class="ABRegStats">
+    <div class="ABRegStats vis">
       <a href="#" style="float: right;">World Stats</a>
-      <h3>Down Under</h3>
+      <h3>down under</h3>
       <div class="stats total">Total population: <em>30,000,000</em></div>
       <div class="stats converted">Converted: <em>10,000</em></div>
       <div class="stats disb">Disbelievers: <em>30,000</em></div>
       <div class="stats unexposed">Unexposed: <em>26,000,000</em></div>
-      <h4>Actions:</h4>
+      <h4>actions</h4>
       <div class="actions">
         <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
         <a href="#" onclick="ABGame.communication('pamphlets'); return false;">Buy Pamphlets<em>$300,000</em></a>
