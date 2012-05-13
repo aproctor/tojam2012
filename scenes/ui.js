@@ -52,7 +52,7 @@ Crafty.c("ABRegStats", {
     if(!global) {
       buffer.push('<a class="worldLink" href="#" style="float: right;" onclick="ABGame.world.selectRegion();">World</a>');
     }
-    buffer.push('<h3>');
+    buffer.push('<h3 class="bold">');
     if(global) {
       buffer.push("world");
     } else {
