@@ -172,12 +172,21 @@ Crafty.c("ABCommunication",{
      return this;
    },
    
-   renderLink: function(global) {
+   renderLink: function(regRef) {
      var buff = [];
+     
+     var global = true;
+     if(regRef) {
+       global = false;
+     }
      
      if(global === true && this.global === true || global === false && this.global === false) {
        buff.push('<a href="#" onclick="ABGame.communication(\'');
        buff.push(this.ref);
+       if(!global) {
+         buff.push("', '");
+        buff.push(regRef);
+       }
        buff.push('\'); return false;" class="commLink" style="background-image: url(\'images/Comms/');
        buff.push(this.ref);
        buff.push('.png\')">');

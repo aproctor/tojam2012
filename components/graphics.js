@@ -14,7 +14,7 @@ Crafty.c("ABMeter", {
       val: 0,
       w: 0,
       max_width: 16*32 - 4,
-      barcolor: 'lightGreen'
+      barcolor: '#FCD150'
     });
   },
   

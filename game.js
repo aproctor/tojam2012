@@ -89,7 +89,9 @@ var ABGame = {
     if(this.campaign.chargeMoney(c.cost)) {
       if(regRef) {
         //Update Regional stats
-        this.world.regions[regRef].statsEn.updateStats(c).updateConvRate();
+        var r = this.world.regions[regRef];
+        console.log(r.statsEn.updateStats(c).compound({}));
+        r.updateConvRate();
       } else {
         //GLOBAL
         this.campaign.updateStats(c);

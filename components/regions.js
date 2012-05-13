@@ -4,6 +4,7 @@ Crafty.c("ABWorld", {
   regions: null,
   time_bar: null,
   population: 0,
+  statsViewEn: null,
   
   init: function() {
     this.addComponent("2D, DOM, Image");
@@ -33,12 +34,17 @@ Crafty.c("ABWorld", {
     this.bind("EnterFrame", this._ABWorld_enterframe);
   },
   
+  setup: function() {
+    this.statsViewEn = Crafty.e("ABRegStats").setup();
+    this.selectRegion();
+  },
+  
   selectedRegionRef: null,
   selectRegion: function(ref) {
     //TODO if null, set world stats
     $('.ABRegStats.vis').removeClass('vis');
 
-    $('#reg_stats_'+ref||"world").addClass('vis');    
+    $('#reg_stats_'+(ref||"")).addClass('vis');    
     
     this.selectedRegionRef = ref || null;
   },
@@ -76,6 +82,11 @@ Crafty.c("ABWorld", {
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         }        
       }
+      
+      /*
+       * TODO Update Global Stats
+       */
+      
     }
   },
   

@@ -33,20 +33,38 @@ Crafty.c("ABRegStats", {
   },
   
   setup: function(region) {
-    this.region = region;
-    this.stats = region.statsEn;
+    var ref = null;
+    var global = true;
+    if(region) {
+      ref = region.reference;
+      this.region = region;
+      this.stats = region.statsEn;
+      global = false;
+    }
     
     var buffer = [];
     
     buffer.push('<div id="reg_stats_');
-    buffer.push(region.reference);
+    if(!global) {
+      buffer.push(ref);
+    }
     buffer.push('" class="ABRegStats">');
-    buffer.push('<a href="#" style="float: right;" onclick="ABGame.world.selectRegion();">World</a>');
+    if(!global) {
+      buffer.push('<a class="worldLink" href="#" style="float: right;" onclick="ABGame.world.selectRegion();">World</a>');
+    }
     buffer.push('<h3>');
-    buffer.push(region.title.toLowerCase());
+    if(global) {
+      buffer.push("world");
+    } else {
+      buffer.push(region.title.toLowerCase());
+    }
     buffer.push('</h3>');
     buffer.push('<div class="stats total">Total population: <em>');
-    buffer.push(region.population.formatMoney(0,'.',','));
+    if(global) {
+      buffer.push(ABGame.world.population.formatMoney(0,'.',','));
+    } else {
+      buffer.push(region.population.formatMoney(0,'.',','));
+    }
     buffer.push('</em></div>');
     buffer.push('<div class="stats converted">Converted: <em>');
     buffer.push(0);
@@ -55,17 +73,21 @@ Crafty.c("ABRegStats", {
     buffer.push(0);
     buffer.push('</em></div>');
     buffer.push('<div class="stats unexposed">Unexposed: <em>');
-    buffer.push(region.population.formatMoney(0,'.',','));
+    if(global) {
+      buffer.push(ABGame.world.population.formatMoney(0,'.',','));
+    } else {
+      buffer.push(region.population.formatMoney(0,'.',','));
+    }
     buffer.push('</em></div>');
     buffer.push('<div class="stats ratio">Conv. Rate: <em>');
-    buffer.push(region.conv_rate);
+    buffer.push(0.2);
     buffer.push('</em></div>');
     buffer.push('<h4>actions</h4>');
     buffer.push('<div class="actions">');
     
     
     for(var c in ABGame.COMMS) {
-      buffer.push(ABGame.COMMS[c].renderLink(false));
+      buffer.push(ABGame.COMMS[c].renderLink(ref));
     }
 
     buffer.push('</div></div>');

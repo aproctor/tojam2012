@@ -20,6 +20,7 @@ $("#logo").show();
 
 Crafty.scene('main-world', function() {
   ABGame.world = Crafty.e('ABWorld');
+  ABGame.world.setup();
   
   $("#intro_"+ABGame.disaster).toggle();
   $('#controls').show();

@@ -80,6 +80,10 @@
     .ABRegStats.vis {
       display: block;
     }
+    
+    .ABRegStats a.worldLink {
+      color: white;
+    }
 
     .ABRegStats h3 {
       margin: -13px 0 40px;
