@@ -24,7 +24,11 @@ Crafty.c("ABWorld", {
     
     this.regions.DU = Crafty.e('ABRegDU').updateConvRate();
     
-    this.time_bar = Crafty.e('ABMeter').start({x: 10, y: 600});
+    this.time_bar = Crafty.e('ABMeter').start({x: 10, y: 600}).bind('MeterFill', function() {
+      this.unbind("EnterFrame", this._ABWorld_enterframe);
+      ABGame.world.selectRegion();
+      ABGame.nextScene();
+    });
     
     for(var r in this.regions) {
       this.regions[r].setup();
@@ -41,7 +45,6 @@ Crafty.c("ABWorld", {
   
   selectedRegionRef: null,
   selectRegion: function(ref) {
-    //TODO if null, set world stats
     $('.ABRegStats.vis').removeClass('vis');
 
     $('#reg_stats_'+(ref||"")).addClass('vis');    
@@ -59,17 +62,23 @@ Crafty.c("ABWorld", {
       
       this.time_bar.deltaVal(ABGame.tickRate);
       
+      var totalConverted = 0;
+      var totalDismissed = 0;
+      
       for(var i in this.regions) {
         var r = this.regions[i];
         
         r._reg_tick();
+        
+        totalConverted += r.num_converted;
+        totalDismissed += r.num_denying;
         
         /*
          * Set Region color based on stats
          */
         if(ABGame.DEBUG.prettyMode === true) {
           var h = 20 + Math.random()*150;
-          var s = (90 - 40)*(this.wtick / 500) + 40;
+          var s = 70;
           var l = 65 + Math.random()*8;
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         } else {
@@ -84,9 +93,20 @@ Crafty.c("ABWorld", {
       }
       
       /*
-       * TODO Update Global Stats
+       * Update Global Stats
        */
+      if(this.selectedRegionRef == null) {
+        //totalConverted
+        //totalDismissed
+        var pref = "#reg_stats_";
+        $(pref + ' .converted em').html(totalConverted.formatMoney(0,'.',','));
+        $(pref + ' .disb em').html(totalDismissed.formatMoney(0,'.',','));
+        $(pref + ' .unexposed em').html((this.population - (totalDismissed + totalConverted)).formatMoney(0,'.',','));
+      }
       
+      if(this.population - (totalDismissed + totalConverted) <= 0) {
+        this.trigger("WorldExposed");
+      }
     }
   },
   

@@ -13,7 +13,7 @@ Crafty.c("ABCampaign", {
     this.attr(attrs || {});
     this.getInitStatsForRef(this.ref);
     
-    this.updateMoney(50);
+    this.updateMoney(1000);
     
     return this;
   },
@@ -192,7 +192,7 @@ Crafty.c("ABCommunication",{
        buff.push('.png\')">');
        buff.push(this.title);
        buff.push('<em>$');
-       buff.push(this.cost);
+       buff.push(this.cost.formatMoney(0,'.',','));
        buff.push('</em></a>');
      }
      

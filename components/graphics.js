@@ -5,7 +5,7 @@ Crafty.c("ABMeter", {
     
     this.attr({
       min_val: 0,
-      max_val: 300,
+      max_val: 3000,
       init_val: 0,
       h: 28,
       x: 5*32+2,
@@ -39,6 +39,7 @@ Crafty.c("ABMeter", {
     }
     if(target > this.max_val) {
       target = this.max_val;
+      this.trigger("MeterFill")
     }
     this.setVal(target);
   },

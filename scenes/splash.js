@@ -21,6 +21,9 @@ $("#logo").show();
 Crafty.scene('main-world', function() {
   ABGame.world = Crafty.e('ABWorld');
   ABGame.world.setup();
+  ABGame.world.bind("WorldExposed", function() {
+    ABGame.nextScene();
+  });
   
   $("#intro_"+ABGame.disaster).toggle();
   $('#controls').show();

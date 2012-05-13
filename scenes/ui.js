@@ -79,9 +79,11 @@ Crafty.c("ABRegStats", {
       buffer.push(region.population.formatMoney(0,'.',','));
     }
     buffer.push('</em></div>');
-    buffer.push('<div class="stats ratio">Conv. Rate: <em>');
-    buffer.push(0.2);
-    buffer.push('</em></div>');
+    if(!global) {
+      buffer.push('<div class="stats ratio">Conv. Rate: <em>');
+      buffer.push(0.2);
+      buffer.push('</em></div>');
+    }
     buffer.push('<h4>actions</h4>');
     buffer.push('<div class="actions">');
     
