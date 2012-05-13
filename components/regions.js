@@ -134,12 +134,14 @@ Crafty.c("ABRegion", {
       
       this.num_exposed += pop;
       
-      console.log(this.num_converted);
-      
       ABGame.campaign.chargeMoney(-1 * this.num_converted * ABGame.GOLD_PER_CONV);
       
       if(this.regSelected()) {
         /* update view components */
+        var pref = "#reg_stats_"+this.reference;
+        $(pref + ' .converted em').html(this.num_converted.formatMoney(0,'.',','));
+        $(pref + ' .disb em').html(this.num_denying.formatMoney(0,'.',','));
+        $(pref + ' .unexposed em').html((this.population - this.num_exposed).formatMoney(0,'.',','));
       }
     },
     

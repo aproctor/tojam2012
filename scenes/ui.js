@@ -46,19 +46,19 @@ Crafty.c("ABRegStats", {
     buffer.push(region.title.toLowerCase());
     buffer.push('</h3>');
     buffer.push('<div class="stats total">Total population: <em>');
-    buffer.push(region.population);
+    buffer.push(region.population.formatMoney(0,'.',','));
     buffer.push('</em></div>');
     buffer.push('<div class="stats converted">Converted: <em>');
-    //TODO buffer.push(10,000
+    buffer.push(0);
     buffer.push('</em></div>');
     buffer.push('<div class="stats disb">Disbelievers: <em>');
-    //TODO buffer.push(30,000
+    buffer.push(0);
     buffer.push('</em></div>');
     buffer.push('<div class="stats unexposed">Unexposed: <em>');
-    //TODO buffer.push(26,000,000
+    buffer.push(region.population.formatMoney(0,'.',','));
     buffer.push('</em></div>');
     buffer.push('<div class="stats ratio">Conv. Rate: <em>');
-    //TODO buffer.push(0.75
+    buffer.push(region.conv_rate);
     buffer.push('</em></div>');
     buffer.push('<h4>actions</h4>');
     buffer.push('<div class="actions">');

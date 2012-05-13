@@ -13,7 +13,7 @@ Crafty.c("ABCampaign", {
     this.attr(attrs || {});
     this.getInitStatsForRef(this.ref);
     
-    this.updateMoney(300);
+    this.updateMoney(50);
     
     return this;
   },
