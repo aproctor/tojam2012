@@ -84,7 +84,7 @@ Crafty.c("ABRegStats", {
       buffer.push(0.2);
       buffer.push('</em></div>');
     }
-    buffer.push('<h4>actions</h4>');
+    buffer.push('<h4>communications</h4>');
     buffer.push('<div class="actions">');
     
     

@@ -86,7 +86,10 @@ Crafty.c("ABWorld", {
           var s = 96;
           var l = 65;
           if(r.regSelected && r.regSelected()) {
-            l += 20;
+            //l += 20;
+            h = 3;
+            s = 82;
+            l = 97;
           }
           r.color('hsl('+h+','+s+'%,'+l+'%)');
         }        

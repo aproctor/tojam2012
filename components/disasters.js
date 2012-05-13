@@ -139,8 +139,8 @@ Crafty.c("ABCommunication",{
      } else if(ref == "prop") {
        this.attr({
          title: "Propaganda",
-         cost: 800000,
-         exposure: 100000,
+         cost: 8000000,
+         exposure: 1000000,
          global: true
        });
        this.updateStats(ABGame.TAGS.simple);
