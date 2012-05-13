@@ -5,6 +5,7 @@ Crafty.scene("splash", function() {
 });
 
 Crafty.scene("choose", function() {
+$("#logo").show();
     $('#controls').hide();
   Crafty.e("2D, DOM, Image").attr({x: 0, y: 0, w: ABGame.width, h: ABGame.height}).image(ABGame.ASSETS.choose_screen, "repeat");
   

@@ -17,7 +17,17 @@
       font-family: Arial 'Black';
       font-weight: bold;
     }
-    
+
+    body {
+     background: black;
+     margin: 0;
+     padding: 0;
+    }
+
+    #cr-stage {
+     margin: 50px 10px;
+    }
+
     .clearfix:after {
     	content: ".";
     	display: block;
@@ -30,16 +40,16 @@
     .clearfix {
     	display: inline-block;
     }
-    
+
     #controls {
       position: absolute;
       display: none;
-      top: 490px;
+      top: 530px;
       left: 14px;
       z-index: 20;
       background: #CCC;
     }
-    
+
     #controls a {
       display: inline-block;
       margin: 1px;
@@ -52,11 +62,11 @@
       text-align: center;
       line-height: 30px;
     }
-  
+
     .ABRegion, .ABDisasterChoice {
       //border: 2px solid yellow;
     }
-    
+
     .ABRegStats {
       position: absolute;
       display: none;
@@ -72,13 +82,13 @@
     .ABRegStats.vis {
       display: block;
     }
-    
+
     .ABRegStats h3 {
       margin-top: 0;
       font-size: 20px;
       color: lightBlue;
     }
-    
+
     .ABRegStats .stats {
       font-size: 18px;
       width: 260px;
@@ -98,20 +108,20 @@
     .ABRegStats .unexposed {
       color: #CCC;
     }
-    
+
     .ABRegStats .actions a {
       width: 260px;
       color: lightBlue;
       float: left;
       clear: both;
     }
-    
+
     .ABRegStats .actions a em {
       float: right;
     }
-    
-    
-    
+
+
+
     .ABRegText {
       color: lightBlue;
       z-index: 999;
@@ -120,7 +130,7 @@
       text-align: center;
       -webkit-text-stroke: 1px black;
     }
-    
+
     .intros > * {
       position: absolute;
       display: none;
@@ -132,45 +142,53 @@
       z-index: 99;
       padding: 15px 15px;
     }
-    
+
     .intros > * h3 {
       margin-top: 0px;
     }
-    
+
     .intros .icn {
       width: 96px;
       height: 128px;
       float: left;
       margin-right: 20px;
     }
-    
+
     #intro_alien .icn {
       background: url('images/Disasters/96/alien.png');
     }
-    
+
     #intro_com .icn {
       background: url('images/Disasters/96/com.png');
     }
-    
+
     #intro_moral .icn {
       background: url('images/Disasters/96/moral.png');
     }
-    
+
     #intro_nuke .icn {
       background: url('images/Disasters/96/nuke.png');
     }
-    
+
     #intro_rap .icn {
       background: url('images/Disasters/96/rap.png');
     }
-    
+
     #intro_warm .icn {
       background: url('images/Disasters/96/warm.png');
     }
-    
+
+    #logo {
+	    position: absolute;
+		top: 0;
+		left: 0px;
+		display: none;
+	}
+
   </style>
   </head>
   <body>
+  	<img id="logo" src="images/title.png"/>
     <div class="intros">
       <!-- alien -->
       <div id="intro_alien">
@@ -181,12 +199,12 @@
           The world is ending!<br /><br />
           After driving 3-nights straight in your big rig, you noticed a strange
           pattern of lights in the night sky.  You attempt to reach out on your
-          HAM radio but are greeted by a series of scrambled bleeps and bloops. 
-          <br /><br />              
+          HAM radio but are greeted by a series of scrambled bleeps and bloops.
+          <br /><br />
           The world is ending.  Spread the Word!
         </div>
       </div>
-      
+
       <!-- com -->
       <div id="intro_com">
         <div class="icn">
@@ -194,12 +212,12 @@
         <h3>Communism</h3>
         <div class="text">
           The world is ending!<br /><br />
-          
+
           <br /><br />
           The world is ending.  Spread the Word!
         </div>
       </div>
-      
+
       <!-- moral -->
       <div id="intro_moral">
         <div class="icn">
@@ -207,12 +225,12 @@
         <h3>Moral Decay</h3>
         <div class="text">
           The world is ending!<br /><br />
-          
+
           <br /><br />
           The world is ending.  Spread the Word!
         </div>
       </div>
-      
+
       <!-- nuke -->
       <div id="intro_nuke">
         <div class="icn">
@@ -220,12 +238,12 @@
         <h3>Nuclear Warfare</h3>
         <div class="text">
           The world is ending!<br /><br />
-          
+
           <br /><br />
           The world is ending.  Spread the Word!
         </div>
       </div>
-      
+
       <!-- rap -->
       <div id="intro_rap">
         <div class="icn">
@@ -233,12 +251,12 @@
         <h3>The Rapture</h3>
         <div class="text">
           The world is ending!<br /><br />
-          
+
           <br /><br />
           The world is ending.  Spread the Word!
         </div>
       </div>
-      
+
       <!-- warm -->
       <div id="intro_warm">
         <div class="icn">
@@ -246,12 +264,12 @@
         <h3>Global Warming</h3>
         <div class="text">
           The world is ending!<br /><br />
-          
+
           <br /><br />
           The world is ending.  Spread the Word!
         </div>
       </div>
-      
+
     </div>
     <div class="ABRegStats">
       <a href="#" style="float: right;">World Stats</a>
@@ -277,7 +295,7 @@
       <a href="#" class="2x" onclick="ABGame.setTickRate(2); Crafty.pause(false); return false;"><div>2x</div></a>
       <a href="#" class="10x" onclick="ABGame.setTickRate(10); Crafty.pause(false); return false;"><div>10x</div></a>
     </div>
-    
-    
+
+
   </body>
 </head>
